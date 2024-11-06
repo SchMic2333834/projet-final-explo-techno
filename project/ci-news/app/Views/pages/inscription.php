@@ -4,7 +4,7 @@
     <form method="post" action="test/insc" >
         <?= csrf_field() ?>
 
-        <p id="erreur"><?php echo esc($message) ?></p>
+        <p id="erreur"><?php echo session()->getFlashdata('message') ?></p>
         <div id="noms">
             <div class="nom">
                 <label for="nom" class="boxNom">Nom : </label>

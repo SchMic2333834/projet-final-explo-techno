@@ -67,10 +67,12 @@ class InscriptionController extends BaseController {
 
                 $test = $reponse->execute($email)->getResult('array');
 
-                $test = $test[0]['email'];
+                if(isset($test[0])){
+                    $test = $test[0]['email'];
+                }
 
                 if($email == $test){
-                    return redirect()->back()/*to("pages/inscription")->with('message', "Email déjà utilisé.")*/;
+                    return redirect()->to("inscription")->with('message', "Email déjà utilisé.");
                 }
                 else{
                     $fullNom = $prenom . " " . $nom;
@@ -89,15 +91,15 @@ class InscriptionController extends BaseController {
                 $con->close();
             }
             else{
-                return redirect()->back()/*to("pages/inscription")->with('message', "Les mots de passe entrés ne concordent pas.")*/;
+                return redirect()->to("/inscription")->with('message', "Les mots de passe entrés ne concordent pas.");
             }
         }
         elseif(isset($_POST["email"]) && isset($_POST["mdp"]) && !isset($_POST["mdpConfirm"])){
-            return redirect()->back()/*to("pages/inscription")->with('message', "Veuillez confirmer votre mot de passe..")*/;
+            return redirect()->to("inscription")->with('message', "Veuillez confirmer votre mot de passe..");
         }
         else{
-            return redirect()->back()/*to("pages/inscription")->with('message', "Veuillez remplir tous les champs")*/;
+            return redirect()->to("inscription")->with('message', "Veuillez remplir tous les champs");
         } 
-        return redirect()->back();
+        return redirect()->to("accueil");
     }
 }
