@@ -1,68 +1,6 @@
 <?php
-namespace App\Controllers;/*
-
-
 namespace App\Controllers;
 
-use CodeIgniter\Database\Query;
-
-class LoginController extends BaseController {
-    function verifierInfo(){
-        if(isset($_POST["email"]) && isset($_POST["mdp"])) {
-            $mdp = $_POST["mdp"];
-            $email = $_POST["email"];
-
-            $data = null;
-                $con = db_connect();
-
-        
-                $reponse = $con->prepare(static function ($con) {
-                    $sql = $con->query("SELECT email FROM `tblutilisateurs` WHERE email = ?");
-
-                    return (new Query($con))->setQuery($sql);
-                });
-
-                $test = $reponse->execute($email)->getResult('array');
-
-                if (isset($test[0])){
-                    $test = $test[0]['email'];
-                }
-
-                if($email == $test){
-                    return redirect()->to("pages/inscription")->with('message', "Email déjà utilisé.");
-                }
-                else{
-                    $sql = "SELECT sel FROM tblUtilisateurs WHERE email = $email";
-                    $salt = $con->query($sql);
-                    $hash = \Config\Services::HashPassword($mdp, $salt);
-
-                    $requete = "SELECT * FROM tblUtilisateurs WHERE email = ? AND mdp = ?";
-                    $reponse = $con->prepare($requete);
-                    if ($utilisateur = $reponse->fetch()){
-                        $_SESSION["sessionConnexion"] = $utilisateur["nom"];
-                        return redirect()->to("pages/accueil");
-                    }
-
-                    $reponse = $con->prepare(static function ($con) {
-                        $sql = "INSERT INTO `tblutilisateurs` VALUES (DEFAULT, ?, ?, ?, ?, ?)";
-                
-                        return (new Query($con))->setQuery($sql);
-                    });
-                        
-                    $reponse->execute($fullNom, $hash, $salt, $email, 1);
-                }
-                $reponse->close();
-                $con->close();
-            }
-            else{
-            return redirect()->to("pages/inscription")->with('message', "Veuillez remplir tous les champs");
-        } 
-        return redirect()->back();
-        }
-        
-    }
-    */
-    
 use CodeIgniter\Controller;
 
 class ConnexionController extends BaseController
@@ -92,14 +30,21 @@ class ConnexionController extends BaseController
         $db = db_connect();
 
         // Use Query Builder to get the user by email
-        $builder = $db->table('tblutilisateurs');
+        $builder = $db->table('tblUtilisateurs');
         $builder->where('email', $email);
         $query = $builder->get();
         $user  = $query->getRowArray();
 
         if ($user) {
-            // User found, verify password
-            if (password_verify($mdp, $user['mdp'])) {
+            // User found, retrieve salt and stored hash
+            $salt = $user['sel'];        // Assuming 'sel' is the column name for salt
+            $storedHash = $user['mdp'];  // Assuming 'mdp' is the column name for the hashed password
+
+            // Hash the entered password with the salt
+            $hash = \Config\Services::HashPassword($mdp, $salt);
+
+            // Compare the hashes
+            if ($hash == $storedHash) {
                 // Password is correct, set session and regenerate ID
                 $session->set('sessionConnexion', $user['nom']);
                 $session->regenerate();

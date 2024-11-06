@@ -33,7 +33,7 @@ class Services extends BaseService
     static function HashPassword($password, $salt) {
         for($i = 0; $i < 5; $i++){
             $password .= $salt;
-            $password = password_hash($password, PASSWORD_BCRYPT);
+            $password = hash("sha512", $password);
         }
         return $password;
     }

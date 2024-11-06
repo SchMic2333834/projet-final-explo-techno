@@ -21,7 +21,7 @@ CREATE TABLE role (
 CREATE TABLE tblUtilisateurs(
     id                      INT                 NOT NULL                AUTO_INCREMENT          PRIMARY KEY,
     nom                     VARCHAR(100)        NOT NULL,
-    mdp                     VARCHAR(100)        NOT NULL,
+    mdp                     VARCHAR(255)        NOT NULL,
     sel                     VARCHAR(64)         NOT NULL,
     email                   VARCHAR(255)        NOT NULL                UNIQUE,
     role_id                 INT,
