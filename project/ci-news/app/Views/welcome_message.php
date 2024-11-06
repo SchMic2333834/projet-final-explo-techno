@@ -213,7 +213,7 @@
             <li class="menu-toggle">
                 <button id="menuToggle">&#9776;</button>
             </li>
-            <li class="menu-item hidden"><a href="accueil">Accueil</a></li>
+            <li class="menu-item hidden"><a href="inscription">Accueil</a></li>
             <li class="menu-item hidden"><a href="parcours">Parcours</a></li>
             <!--<li class="menu-item hidden"><a href="https://codeigniter.com/user_guide/" target="_blank">Docs</a>
             </li>

@@ -29,4 +29,12 @@ class Services extends BaseService
      *     return new \CodeIgniter\Example();
      * }
      */
+
+    static function HashPassword($password, $salt) {
+        for($i = 0; $i < 5; $i++){
+            $password .= $salt;
+            $password = password_hash($password, PASSWORD_BCRYPT);
+        }
+        return $password;
+    }
 }

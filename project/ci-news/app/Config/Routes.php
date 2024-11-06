@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\InscriptionController;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -10,4 +11,7 @@ $routes->get('/', 'Home::index');
 use App\Controllers\Pages;
 
 $routes->get('pages', [Pages::class, 'index']);
+$routes->post('test/insc', [InscriptionController::class,'verifierInfo']);
 $routes->get('(:segment)', [Pages::class, 'view']);
+
+

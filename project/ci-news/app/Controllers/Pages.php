@@ -18,8 +18,12 @@ class Pages extends BaseController
             throw new PageNotFoundException($page);
         }
 
-        $data['title'] = ucfirst($page); // Capitalize the first letter
 
+        $data['title'] = ucfirst($page); // Capitalize the first letter
+        if($page == "inscription" && key_exists('message', $data) == false) {
+            $data['message'] = '';
+        }
+        
         return view('templates/header', $data) 
             . view('pages/' . $page);
     }
