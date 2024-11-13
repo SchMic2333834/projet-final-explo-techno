@@ -31,6 +31,8 @@
     <div id="content">
         <div id="terminal">
             <?php
+                $session = session();
+                $history = $session->get('history');
                 if (isset($history) && is_array($history)) {
                     foreach ($history as $line) {
                         echo htmlspecialchars($line) . "<br>";
@@ -40,6 +42,7 @@
         </div>
         <form method="post" action="command">
             <input id="input" type="text" name="command" autofocus placeholder="Tapez une commande..." />
+            <button type="submit">Enter</button>
         </form>
     </div>
 </body>
