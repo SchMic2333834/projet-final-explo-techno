@@ -35,7 +35,14 @@
                 $history = $session->get('history');
                 if (isset($history) && is_array($history)) {
                     foreach ($history as $line) {
-                        echo htmlspecialchars($line) . "<br>";
+                        if(is_array($line)) {
+                            foreach ($line as $line2){
+                                echo $line2 . "<br>";
+                            }
+                        }
+                        else{
+                            echo htmlspecialchars($line) . "<br>";
+                        }
                     }
                 }
             ?>
