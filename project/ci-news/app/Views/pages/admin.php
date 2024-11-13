@@ -25,6 +25,9 @@
             font-family: monospace;
             outline: none;
         }
+        p {
+            color: green;
+        }
     </style>
 </head>
 <body>
