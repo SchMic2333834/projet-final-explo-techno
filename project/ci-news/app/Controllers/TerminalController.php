@@ -9,36 +9,27 @@ class TerminalController extends BaseController{
 
     public function command(){
         $session = session();
-        
+        $con = db_connect();
         $command = "";
-        if(isset($_POST["command"])) {
-            $command = $_POST["command"];
-            array_push($this->history, $command);
-
-            $con = db_connect();
-
-            $reponse = $con->prepare(static function ($con, $command) {
-                $sql = $con->query($command);
-
-                return (new Query($con))->setQuery($sql);
-            });
-
-            if($reponse->hasError()){
-                array_push($this->history, $reponse->getErrorMessage());
+        try {
+            $sql = $con->query($command); // Execute the query directly
+        
+            if ($sql) {
+                // Check if the query returns a result set
+                $result = $sql->getResultArray();
+                if (empty($result)) {
+                    // If there are no results, show affected rows
+                    $this->history[] = $con->affectedRows() . " rows were modified.";
+                } else {
+                    // If there are results, store them
+                    $this->history = array_merge($this->history, $result);
+                }
             }
-            else{
-                $reponse->execute();
-            }
-
-            if($reponse->_getResult() == null){
-                array_push($this->history, $con->affectedRows() . " lignes ont été modifiées.");
-            }
-            else{
-                $this->history = $reponse->_getResult();
-            }
-
-            session()->set("history", $this->history);
+        } catch (\Exception $e) {
+            // Catch errors and store the error message
+            $this->history[] = "Error: " . $e->getMessage();
         }
+        session()->set("history", $this->history);
         return view('admin');
     }
 }
