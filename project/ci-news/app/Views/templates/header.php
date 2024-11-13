@@ -12,4 +12,5 @@
             background: rgba(50, 40, 0, 0.3);
             font-family: "Courier New", "monospace";
         }
+    </style>
 
