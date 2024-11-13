@@ -7,7 +7,6 @@ class ConnexionController extends BaseController
 {
     public function verifierInfo()
     {
-        // Start the session
         $session = session();
 
         // Validate input
@@ -47,6 +46,7 @@ class ConnexionController extends BaseController
             if ($hash == $storedHash) {
                 // Password is correct, set session and regenerate ID
                 $session->set('sessionConnexion', $user['nom']);
+                $session->set('sessionRole', $user['role_id']);
                 $session->regenerate();
                 return redirect()->to('accueil');
             } else {

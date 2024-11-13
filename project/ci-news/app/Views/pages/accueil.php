@@ -1,3 +1,4 @@
+<style>
     body {
         display: flex;
         flex-direction: column;
@@ -7,6 +8,7 @@
 </head>
 <body>
     <?php 
+    $session = session();
         /*$db = \Config\Database::connect();
         $query = $db->query('SELECT * FROM tbltest');
         $results = $query->getResult();
