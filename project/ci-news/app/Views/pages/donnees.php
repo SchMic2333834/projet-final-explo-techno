@@ -1,5 +1,6 @@
 </style>
 </head>
+<h1>Tableaux des détections et Activations</h1>
 <?php
 use App\Controllers\DonneesController;
 $db = db_connect();
