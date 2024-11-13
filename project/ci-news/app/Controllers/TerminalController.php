@@ -11,6 +11,9 @@ class TerminalController extends BaseController{
         $session = session();
         $con = db_connect();
         $command = "";
+        if(isset($_POST["command"])){
+            $command = $_POST["command"];
+        }
         try {
             $sql = $con->query($command); // Execute the query directly
         
