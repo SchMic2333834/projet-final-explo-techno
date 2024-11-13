@@ -33,6 +33,6 @@ class TerminalController extends BaseController{
             $this->history[] = "Error: " . $e->getMessage();
         }
         session()->set("history", $this->history);
-        return view('admin');
+        return redirect()->back();
     }
 }
