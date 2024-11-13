@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\Database\Query;
 
 class TerminalController extends BaseController{
@@ -11,9 +12,14 @@ class TerminalController extends BaseController{
             $history = $session->get("history");
         }
         $con = db_connect();
-        $command = "";
+        $command = "null";
         if(isset($_POST["command"])){
-            $command = $_POST["command"];
+            if($_POST["command"] == ""){
+                $command = "null";
+            }
+            else{
+                $command = $_POST["command"];
+            }
         }
         array_push($history, $command);
         try {
@@ -22,19 +28,19 @@ class TerminalController extends BaseController{
             if ($sql == false) {
                 array_push($history, "Error: " . $con->error());
             }
+            elseif($sql){
+                $history[] = $con->affectedRows() . " rows were modified.";
+            }
             else {
                 // Check if the query returns a result set
                 $result = $sql->getResultArray();
-                if ($result == false) {
-                    // If there are no results, show affected rows
-                    $history[] = $con->affectedRows() . " rows were modified.";
-                } else {
-                    // If there are results, store them
-                    $history = array_merge($history, $result);
-                }
+                // If there are results, store them
+                $history = array_merge($history, $result);
             }
-        } catch (\Exception $e) {
+        } catch (\mysqli_sql_exception | DatabaseException $e) {
             // Catch errors and store the error message
+            $history[] = "Error: " . $e->getMessage();
+        } catch (\Exception $e) {
             $history[] = "Error: " . $e->getMessage();
         }
         session()->set("history", $history);
