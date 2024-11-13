@@ -41,6 +41,7 @@
             ?>
         </div>
         <form method="post" action="command">
+            <?= csrf_field() ?>
             <input id="input" type="text" name="command" autofocus placeholder="Tapez une commande..." />
             <button type="submit">Enter</button>
         </form>
