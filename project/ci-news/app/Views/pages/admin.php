@@ -2,6 +2,7 @@
     <style>
         body {
             margin: 0px;
+            overflow: hidden;
         }
         #content {
             flex-direction: column;
@@ -16,9 +17,13 @@
             overflow-y: auto;
             background-color: #1e1e1e;
         }
+        form {
+            flex: 5%;
+        }
         #input {
-            flex:5%;
             padding-left: 10px;
+            width: 100%;
+            height: 100%;
             border: none;
             background-color: #1e1e1e;
             color: #e0e0e0;
@@ -40,11 +45,11 @@
                     foreach ($history as $line) {
                         if(is_array($line)) {
                             foreach ($line as $line2){
-                                echo $line2 . "<br>";
+                                echo "<p>" . $line2 . "</p>";
                             }
                         }
                         else{
-                            echo htmlspecialchars($line) . "<br>";
+                            echo "<p>" . $line . "</p>";
                         }
                     }
                 }
@@ -53,7 +58,6 @@
         <form method="post" action="command">
             <?= csrf_field() ?>
             <input id="input" type="text" name="command" autofocus placeholder="Tapez une commande..." />
-            <button type="submit">Enter</button>
         </form>
     </div>
 </body>

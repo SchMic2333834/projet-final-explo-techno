@@ -23,19 +23,26 @@ class TerminalController extends BaseController{
         }
         array_push($history, $command);
         try {
-            $sql = $con->query($command); // Execute the query directly
+
+            
         
-            if ($sql == false) {
-                array_push($history, "Error: " . $con->error());
+            if($command == "clear"){
+                $history = null;
             }
-            elseif($sql){
-                $history[] = $con->affectedRows() . " rows were modified.";
-            }
-            else {
-                // Check if the query returns a result set
-                $result = $sql->getResultArray();
-                // If there are results, store them
-                $history = array_merge($history, $result);
+            else{
+                $sql = $con->query($command); // Execute the query directly
+                if ($sql == false) {
+                    array_push($history, "Error: " . $con->error());
+                }
+                else {
+                    if(stripos(trim($command), 'SELECT') !== false){
+                        $result = $sql->getResultArray();
+                        $history = array_merge($history, $result);
+                    }
+                    else{
+                        array_push($history, $con->affectedRows() . ' rows were affected.');
+                    }
+                }
             }
         } catch (\mysqli_sql_exception | DatabaseException $e) {
             // Catch errors and store the error message
