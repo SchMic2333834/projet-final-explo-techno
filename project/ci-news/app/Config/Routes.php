@@ -1,16 +1,19 @@
 <?php
 
 use App\Controllers\ConnexionController;
+use App\Controllers\Home;
 use App\Controllers\InscriptionController;
+use App\Controllers\TerminalController;
 use CodeIgniter\Router\RouteCollection;
 
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+$routes->get('/', [Home::class, 'index']);
 
 use App\Controllers\Pages;
 
+$routes->post('command', [TerminalController::class, 'command']);
 $routes->get('pages', [Pages::class, 'index']);
 $routes->addRedirect('index.php/inscription', 'view' );
 $routes->post('test/insc', [InscriptionController::class,'verifierInfo'], ['as' => 'inscrire']);
