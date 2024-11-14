@@ -58,10 +58,14 @@ def format_time(dt):
     return dt.strftime(fmt)
 
 def loop():
+	activated = True
 	intrusion = False
 	while True:
 		etat = GPIO.input(13)
 		while etat == 1:
+			if activated == True:
+				cursor.execute('INSERT INTO tblActivation (OnOff, temps) VALUES (%s, %s)', (1, date))
+				activated = False
 			etat = GPIO.input(13)
 			if (0 == GPIO.input(ObstaclePin)):
 				date = (datetime.now(),)
@@ -72,6 +76,9 @@ def loop():
 				connection.commit()
 			if 1 == GPIO.input(ObstaclePin):
 				intrusion = False
+		if activated == False:
+			cursor.execute('INSERT INTO tblActivation (OnOff, temps) VALUES (%s, %s)', (0, date))
+			activated = True
 
 def destroy():
 	cursor.close()
