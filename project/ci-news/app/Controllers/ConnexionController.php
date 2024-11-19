@@ -139,4 +139,12 @@ class ConnexionController extends BaseController
             return redirect()->to('connexion');
         }
     }
+
+    function logout() {
+        $session = session();
+
+        $session->set('sessionRole', null);
+        $session->set('sessionConnexion', null);
+        return redirect()->to('connexion');
+    }
 }

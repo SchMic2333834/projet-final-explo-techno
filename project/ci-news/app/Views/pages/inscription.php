@@ -1,6 +1,19 @@
 </style>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin:0;
+    }
+    form {
+        flex: 90%;
+        width: 100%;
+    }
+</style>
 </head>
 <body>
+    <?= view('templates/nav'); ?>
     <form method="post" action="test/insc" >
         <?= csrf_field() ?>
 

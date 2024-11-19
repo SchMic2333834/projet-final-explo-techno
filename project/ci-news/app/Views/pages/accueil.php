@@ -14,6 +14,7 @@
 </style>
 </head>
 <body>
+    <?= view('templates/nav'); ?>
     <?php 
         $session = session();
         /*$db = \Config\Database::connect();
@@ -26,7 +27,6 @@
         $db = null;*/
         
     ?>
-    <?= view('templates/nav'); ?>
     <div id="home">
         <h1>Raphael Harvey & Michael Schlatter Tao</h1>
         <h2>Exploration Technologique - 420KTAJQ</h2>

@@ -7,11 +7,17 @@
     <style>
         /* Simple styling for demonstration purposes */
         body {
-            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .container {
-            width: 300px;
+            width: 100%;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex:90%;
         }
         .alert {
             color: red;
@@ -27,6 +33,7 @@
     </style>
 </head>
 <body>
+    <?= view('templates/nav'); ?>
     <div class="container">
         <h1>Connexion</h1>
 

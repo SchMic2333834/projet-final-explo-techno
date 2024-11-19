@@ -2,10 +2,12 @@
     header {
         display: flex;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: space-between;
         flex:10%;
         width:100%;
         background-color: #1e1e1e;
+        padding-left: 50px;
+        padding-right: 50px;
     }
     .navButton{
         font-weight: bold;
@@ -19,9 +21,24 @@
     }
 </style>
 <header>
-    <a class="navButton" href="inscription">Inscription</a>
-    <a class="navButton">Test1</a>
-    <a class="navButton">Test2</a>
-    <a class="navButton">Test3</a>
-    <a class="navButton">Test4</a>
+    <a class="navButton" href="pages">Home</a>
+    <?php
+        $session = session();
+        $nom = $session->get("sessionConnexion");
+        $role = $session->get("sessionRole");
+
+        if($role == 1){
+            echo '<a class="navButton" href="donnees">Espace User</a>';
+            echo '<a class="navButton" href="logout">Bonjour, ' . $nom . '</a>';
+        }
+        if($role == 2){
+            echo '<a class="navButton" href="donnees">Espace User</a>';
+            echo '<a class="navButton" href="admin">Espace Admin</a>';
+            echo '<a class="navButton" href="logout">Bonjour, ' . $nom . '</a>';
+        }
+        if($role != 1 && $role != 2) {
+            echo '<a class="navButton" href="inscription">Inscription</a>';
+            echo '<a class="navButton" href="connexion">Connexion</a>';
+        }
+    ?>
 </header>

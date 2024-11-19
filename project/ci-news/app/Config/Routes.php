@@ -13,6 +13,7 @@ $routes->get('/', [Home::class, 'index']);
 
 use App\Controllers\Pages;
 
+$routes->get('logout', [ConnexionController::class, 'logout']);
 $routes->post('command', [TerminalController::class, 'command']);
 $routes->get('pages', [Pages::class, 'index']);
 $routes->addRedirect('index.php/inscription', 'view' );

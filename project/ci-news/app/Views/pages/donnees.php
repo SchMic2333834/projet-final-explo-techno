@@ -3,9 +3,20 @@
     <style>
         /* Styles généraux pour une apparence moderne */
         body {
-            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             background-color: #f4f4f4;
-            margin: 20px;
+            margin: 0px;
+        }
+
+        #contentData{
+            display:flex;
+            flex-direction: column;
+            flex: 90%;
+            width:100%;
+            padding-left: 5%;
+            padding-right: 5%;
         }
 
         h1 {
@@ -92,83 +103,86 @@
     </style>
 </head>
 <body>
+<?= view('templates/nav'); ?>
+<div id="contentData">
 
-<h1>Détections pendant les périodes d'activation</h1>
+    <h1>Détections pendant les périodes d'activation</h1>
 
-<?php
-$db = db_connect();
+    <?php
+    $db = db_connect();
 
-// Récupérer toutes les activations/désactivations ordonnées par temps
-$builder = $db->table('tblActivation');
-$builder->select('*');
-$builder->orderBy('temps', 'ASC');
-$query = $builder->get();
-$activations = $query->getResultArray();
-
-// Construire les périodes d'activation
-$activationPeriods = [];
-$currentActivationStart = null;
-
-foreach ($activations as $row) {
-    if ($row['OnOff'] == 1) { // Activé
-        if ($currentActivationStart === null) {
-            $currentActivationStart = $row['temps'];
-        }
-    } elseif ($row['OnOff'] == 0) { // Désactivé
-        if ($currentActivationStart !== null) {
-            $activationPeriods[] = [
-                'start' => $currentActivationStart,
-                'end' => $row['temps']
-            ];
-            $currentActivationStart = null;
-        }
-    }
-}
-
-// Si le système est toujours activé à la fin
-if ($currentActivationStart !== null) {
-    $activationPeriods[] = [
-        'start' => $currentActivationStart,
-        'end' => date('Y-m-d H:i:s') // Vous pouvez définir une date maximale ici
-    ];
-}
-
-// Afficher les périodes d'activation avec des sections ouvertes par défaut
-foreach ($activationPeriods as $index => $period) {
-    $start = $period['start'];
-    $end = $period['end'];
-
-    // Récupérer les détections pour cette période
-    $builder = $db->table('tblDetection');
+    // Récupérer toutes les activations/désactivations ordonnées par temps
+    $builder = $db->table('tblActivation');
     $builder->select('*');
-    $builder->where('temps >=', $start);
-    $builder->where('temps <=', $end);
+    $builder->orderBy('temps', 'ASC');
     $query = $builder->get();
-    $detections = $query->getResultArray();
+    $activations = $query->getResultArray();
 
-    // Déterminer la classe CSS en fonction des détections
-    $class = empty($detections) ? 'no-detections' : 'has-detections';
+    // Construire les périodes d'activation
+    $activationPeriods = [];
+    $currentActivationStart = null;
 
-    echo '<details class="' . $class . '">'; // Sections ouvertes par défaut
-    echo '<summary>Période d\'activation du ' . $start . ' au ' . $end . '</summary>';
-
-    echo '<div class="content">'; // Conteneur pour le contenu interne
-
-    if (!empty($detections)) {
-        echo '<table>';
-        echo '<tr><th>Temps de détection</th></tr>';
-        foreach ($detections as $detection) {
-            echo '<tr><td>' . $detection['temps'] . '</td></tr>';
+    foreach ($activations as $row) {
+        if ($row['OnOff'] == 1) { // Activé
+            if ($currentActivationStart === null) {
+                $currentActivationStart = $row['temps'];
+            }
+        } elseif ($row['OnOff'] == 0) { // Désactivé
+            if ($currentActivationStart !== null) {
+                $activationPeriods[] = [
+                    'start' => $currentActivationStart,
+                    'end' => $row['temps']
+                ];
+                $currentActivationStart = null;
+            }
         }
-        echo '</table>';
-    } else {
-        echo '<div class="message">Aucune détection pendant cette période.</div>';
     }
 
-    echo '</div>'; // Fin du conteneur de contenu
-    echo '</details>';
-}
-?>
+    // Si le système est toujours activé à la fin
+    if ($currentActivationStart !== null) {
+        $activationPeriods[] = [
+            'start' => $currentActivationStart,
+            'end' => date('Y-m-d H:i:s') // Vous pouvez définir une date maximale ici
+        ];
+    }
+
+    // Afficher les périodes d'activation avec des sections ouvertes par défaut
+    foreach ($activationPeriods as $index => $period) {
+        $start = $period['start'];
+        $end = $period['end'];
+
+        // Récupérer les détections pour cette période
+        $builder = $db->table('tblDetection');
+        $builder->select('*');
+        $builder->where('temps >=', $start);
+        $builder->where('temps <=', $end);
+        $query = $builder->get();
+        $detections = $query->getResultArray();
+
+        // Déterminer la classe CSS en fonction des détections
+        $class = empty($detections) ? 'no-detections' : 'has-detections';
+
+        echo '<details class="' . $class . '">'; // Sections ouvertes par défaut
+        echo '<summary>Période d\'activation du ' . $start . ' au ' . $end . '</summary>';
+
+        echo '<div class="content">'; // Conteneur pour le contenu interne
+
+        if (!empty($detections)) {
+            echo '<table>';
+            echo '<tr><th>Temps de détection</th></tr>';
+            foreach ($detections as $detection) {
+                echo '<tr><td>' . $detection['temps'] . '</td></tr>';
+            }
+            echo '</table>';
+        } else {
+            echo '<div class="message">Aucune détection pendant cette période.</div>';
+        }
+
+        echo '</div>'; // Fin du conteneur de contenu
+        echo '</details>';
+    }
+    ?>
+</div>
 
 </body>
 </html>

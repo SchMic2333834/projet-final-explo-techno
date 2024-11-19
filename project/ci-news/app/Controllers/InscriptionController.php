@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use CodeIgniter\Database\Query;
+use CodeIgniter\I18n\Time;
 
 class InscriptionController extends BaseController {
     /*function creerCompte($email, $mdp, $nom){
@@ -90,7 +91,7 @@ class InscriptionController extends BaseController {
 
                 $tentativesData = [
                     'id' => $userId,
-                    'derniere_tentative' => NOW(),
+                    'derniere_tentative' => Time::now(),
                     'tentatives' => 0,
                     'bloque' => 0,
                 ];
