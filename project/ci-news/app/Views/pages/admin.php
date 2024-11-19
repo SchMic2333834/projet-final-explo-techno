@@ -1,6 +1,8 @@
         
     <style>
         body {
+            display: flex;
+            flex-direction: column;
             margin: 0px;
             overflow: hidden;
         }
@@ -32,10 +34,12 @@
         }
         p {
             color: green;
+            margin: 0px;
         }
     </style>
 </head>
 <body>
+    <?= view('templates/nav') ?>
     <div id="content">
         <div id="terminal">
             <?php
