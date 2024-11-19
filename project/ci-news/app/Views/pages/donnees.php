@@ -149,7 +149,7 @@ foreach ($activationPeriods as $index => $period) {
     // Déterminer la classe CSS en fonction des détections
     $class = empty($detections) ? 'no-detections' : 'has-detections';
 
-    echo '<details class="' . $class . '" open>'; // Sections ouvertes par défaut
+    echo '<details class="' . $class . '">'; // Sections ouvertes par défaut
     echo '<summary>Période d\'activation du ' . $start . ' au ' . $end . '</summary>';
 
     echo '<div class="content">'; // Conteneur pour le contenu interne
