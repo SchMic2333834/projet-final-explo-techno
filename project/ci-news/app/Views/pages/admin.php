@@ -9,8 +9,9 @@
         #content {
             flex-direction: column;
             display:flex;
-            height: 100vh;
             width: 100%;
+            flex:90%;
+            overflow-y: auto;
         }
         #terminal {
             border: 1px solid #444;
