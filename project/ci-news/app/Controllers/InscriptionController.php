@@ -86,7 +86,16 @@ class InscriptionController extends BaseController {
                     });
                         
                     $reponse->execute($fullNom, $hash, $salt, $email, 1);
-                }
+                    $userId = $con->insertID();
+
+                $tentativesData = [
+                    'id' => $userId,
+                    'derniere_tentative' => NOW(),
+                    'tentatives' => 0,
+                    'bloque' => 0,
+                ];
+                $con->table('tblTentatives')->insert($tentativesData);
+            }
                 $reponse->close();
                 $con->close();
             }
