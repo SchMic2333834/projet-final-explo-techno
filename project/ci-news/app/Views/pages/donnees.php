@@ -1,45 +1,42 @@
 <meta charset="UTF-8">
     <title>Détections pendant les périodes d'activation</title>
     <style>
-        /* Styles généraux pour une apparence moderne */
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: #f4f4f4;
-            margin: 0px;
+            background: linear-gradient(135deg, #1f1f1f, #3b3b3b);
+            margin: 0;
+            color: #e4e4e4;
         }
 
-        #contentData{
-            display:flex;
-            flex-direction: column;
-            flex: 90%;
-            width:100%;
-            padding-left: 5%;
-            padding-right: 5%;
+        #contentData {
+            width: 100%;
+            height: 100%;
+            padding: 0 5vw;
         }
 
         h1 {
             text-align: center;
+            color: #e4e4e4;
         }
 
-        /* Styles pour le détail entier */
         details {
             margin-bottom: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #444;
             border-radius: 5px;
             overflow: hidden;
-            background-color: #fff; /* Couleur de fond par défaut */
-            color: black; /* Texte en noir */
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #e4e4e4;
         }
 
-        /* Arrière-plan légèrement vert si aucune détection, légèrement rouge s'il y a des détections */
+
         .no-detections {
-            background-color: #e6ffe6; /* Vert pâle */
+            background-color: rgba(46, 125, 50, 0.2);
         }
 
         .has-detections {
-            background-color: #ffe6e6; /* Rouge pâle */
+            background-color: rgba(183, 28, 28, 0.2);
         }
 
         summary {
@@ -50,17 +47,14 @@
             transition: background-color 0.3s ease;
         }
 
-        /* Accentuation au survol */
         summary:hover {
-            background-color: #e0e0e0;
+            background-color: rgba(255, 255, 255, 0.2);
         }
 
-        /* Styles pour le contenu interne */
         .content {
             padding: 15px;
         }
 
-        /* Styles pour le tableau */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -70,35 +64,36 @@
         table th, table td {
             padding: 10px;
             text-align: left;
+            color: #e4e4e4;
         }
-        table tr{
-            background-color: #fc9d9d;
+
+        table tr {
+            background-color: rgba(183, 28, 28, 0.2);
         }
+
         table tr:nth-child(even) {
-            background-color: #ffe6e6;
+            background-color: rgba(183, 28, 28, 0.1);
         }
 
         table th {
-            background-color: #fc9d9d;
+            background-color: rgba(183, 28, 28, 0.3);
             border-bottom: 1px solid #ddd;
         }
 
-        /* Indicateurs de flèche pour les éléments details */
         summary::after {
-            content: '\25BC'; /* Flèche vers le bas */
+            content: '\25BC';
             position: absolute;
             right: 20px;
             font-size: 12px;
         }
 
         details[open] summary::after {
-            content: '\25B2'; /* Flèche vers le haut */
+            content: '\25B2';
         }
 
-        /* Style pour le message lorsqu'il n'y a aucune détection */
         .message {
             font-style: italic;
-            color: black;
+            color: #e4e4e4;
         }
     </style>
 </head>
@@ -165,7 +160,7 @@
         echo '<details class="' . $class . '">'; // Sections ouvertes par défaut
         echo '<summary>Période d\'activation du ' . $start . ' au ' . $end . '</summary>';
 
-        echo '<div class="content">'; // Conteneur pour le contenu interne
+        echo '<div class="content">';
 
         if (!empty($detections)) {
             echo '<table>';
@@ -178,7 +173,7 @@
             echo '<div class="message">Aucune détection pendant cette période.</div>';
         }
 
-        echo '</div>'; // Fin du conteneur de contenu
+        echo '</div>';
         echo '</details>';
     }
     ?>
