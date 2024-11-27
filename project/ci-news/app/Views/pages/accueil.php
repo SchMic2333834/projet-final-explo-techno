@@ -3,6 +3,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        color:white;
     }
     #home {
         display: flex;
@@ -15,13 +16,22 @@
 </head>
 <body>
     <?= view('templates/nav'); ?>
+    <div id="home">
     <?php 
         $session = session();
+        $nom = $session->get("sessionConnexion");
+            $role = $session->get("sessionRole");
+            echo "<h1>Bienvenue à l'interface de contrôle</h1>";
+            if ($nom)
+            {
+                echo "Accédez aux données dans la page utilisateur.";
+            }
+            else{
+                echo"<h2>Connectez-vous pour pouvoir accéder aux données.</h2>";
+            }
     ?>
-    <div id="home">
-        <h1>Raphael Harvey & Michael Schlatter Tao</h1>
-        <h2>Exploration Technologique - 420KTAJQ</h2>
-        <img src="../assets/bunker.webp" alt="test1" width="500" height="500">
+
     </div>
+    <?= view('templates/footer'); ?>
 </body>
 </html>

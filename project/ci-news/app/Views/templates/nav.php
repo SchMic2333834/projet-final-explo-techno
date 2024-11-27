@@ -27,7 +27,7 @@
         text-decoration: none;
         font-size: 27px;
         transition: transform 200ms;
-        color: green;
+        color: #33FF00;
     }
 
     .navButton:hover {
@@ -57,11 +57,11 @@
     <div class="navRight">
         <?php
         if ($role == 1) {
-            echo '<a class="navButton" href="donnees">Espace User</a>';
+            echo '<a class="navButton" href="donnees">Espace Utilisateur</a>';
             echo '<a class="navButton" href="logout">Déconnexion</a>';
         }
         if ($role == 2) {
-            echo '<a class="navButton" href="donnees">Espace User</a>';
+            echo '<a class="navButton" href="donnees">Espace Utilisateur</a>';
             echo '<a class="navButton" href="admin">Espace Admin</a>';
             echo '<a class="navButton" href="logout">Déconnexion</a>';
         }

@@ -8,7 +8,7 @@ class Pages extends BaseController
 {
     public function index()
     {
-        return view('welcome_message');
+        return view('index');
     }
 
     public function view(string $page = 'home')

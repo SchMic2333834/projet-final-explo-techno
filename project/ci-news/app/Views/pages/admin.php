@@ -34,7 +34,7 @@
             outline: none;
         }
         p {
-            color: green;
+            color: #33FF00;
             margin: 0px;
         }
     </style>
@@ -65,5 +65,6 @@
             <input id="input" type="text" name="command" autofocus placeholder="Tapez une commande..." />
         </form>
     </div>
+    <?= view('templates/footer'); ?>
 </body>
 </html>

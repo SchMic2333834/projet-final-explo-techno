@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <title>Connexion</title>
     <style>
+        body{
+            display: flex;
+            flex-direction: column;
+        }
         #body2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh;
+    height: 90vh;
     margin: 0;
     background: linear-gradient(135deg, #1f1f1f, #3b3b3b);
     color: #e4e4e4;
@@ -108,5 +112,6 @@
         </form>
     </div>
 </div>
+<?= view('templates/footer'); ?>
 </body>
 </html>

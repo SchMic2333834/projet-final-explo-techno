@@ -8,6 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
     <title><?= esc($title) ?></title>
     <style {csp-style-nonce}>
+        em{
+            text-align: center;
+            color:white;
+            width:100vw;
+        }
         .quantico-regular {
             font-family: "Quantico", sans-serif;
             font-weight: 400;
@@ -46,5 +51,29 @@
             background: linear-gradient(135deg, #1f1f1f, #3b3b3b);
             font-family: "quantico", "regular";
         }
+
+        ::-webkit-scrollbar {
+            width: 24px;
+            height: 16px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+            border-radius: 4px;
+            border: 4px solid #1e1e1e;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e1e1e;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5a5a5a;
+        }
+
+        ::-webkit-scrollbar-corner {
+            background: #1e1e1e;
+}
     </style>
 
