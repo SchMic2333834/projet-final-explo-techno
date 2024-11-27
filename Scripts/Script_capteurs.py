@@ -13,7 +13,7 @@ def setup(pin1, pin2, pin3, pin4):
 	global connection
 	connection = mysql.connector.connect(
     	host="localhost",
-    	user="root",
+    	user="raph",
     	password="cegep",
     	database="projet"
 	)	
@@ -64,7 +64,7 @@ def loop():
 		etat = GPIO.input(13)
 		while etat == 1:
 			if activated == True:
-				cursor.execute('INSERT INTO tblActivation (OnOff, temps) VALUES (%s, %s)', (1, date))
+				cursor.execute('INSERT INTO tblActivation (OnOff, temps) VALUES (%s, %s)', (1, datetime.now()))
 				activated = False
 			etat = GPIO.input(13)
 			if (0 == GPIO.input(ObstaclePin)):
@@ -77,7 +77,7 @@ def loop():
 			if 1 == GPIO.input(ObstaclePin):
 				intrusion = False
 		if activated == False:
-			cursor.execute('INSERT INTO tblActivation (OnOff, temps) VALUES (%s, %s)', (0, date))
+			cursor.execute('INSERT INTO tblActivation (OnOff, temps) VALUES (%s, %s)', (0, datetime.now()))
 			activated = True
 
 def destroy():
