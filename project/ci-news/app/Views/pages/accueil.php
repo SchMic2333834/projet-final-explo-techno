@@ -17,15 +17,6 @@
     <?= view('templates/nav'); ?>
     <?php 
         $session = session();
-        /*$db = \Config\Database::connect();
-        $query = $db->query('SELECT * FROM tbltest');
-        $results = $query->getResult();
-
-        foreach($results as $row){
-            echo "<h1>" . $row->nom . "</h1>";
-        }
-        $db = null;*/
-        
     ?>
     <div id="home">
         <h1>Raphael Harvey & Michael Schlatter Tao</h1>
