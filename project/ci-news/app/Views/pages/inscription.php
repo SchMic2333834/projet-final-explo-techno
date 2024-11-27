@@ -1,11 +1,15 @@
 </style>
 <style>
+    body{
+            display: flex;
+            flex-direction: column;
+        }
     #body2 {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        height: 80vh;
+        height: 90vh;
         margin: 0;
         background: linear-gradient(135deg, #1f1f1f, #3b3b3b);
         color: #e4e4e4;
@@ -117,5 +121,6 @@
             <button id="connexion" type="submit">S'inscrire</button>
     </form>
 </div>
+<?= view('templates/footer'); ?>
 </body>
 </html>

@@ -202,7 +202,9 @@
 
 <!-- HEADER: MENU + HEROE SECTION -->
 <header>
-
+<?php
+    
+?>
     <div class="menu">
         <ul>
             <li class="logo">

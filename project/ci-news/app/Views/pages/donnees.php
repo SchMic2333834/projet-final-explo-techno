@@ -178,6 +178,6 @@
     }
     ?>
 </div>
-
+<?= view('templates/footer'); ?>
 </body>
 </html>
