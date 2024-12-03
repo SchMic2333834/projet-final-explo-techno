@@ -43,7 +43,7 @@
 </style>
 <header>
     <div class="navLeft">
-        <a class="navButton" href="accueil">Home</a>
+        <a class="navButton" href="accueil">Accueil</a>
         <?php
             $session = session();
             $nom = $session->get("sessionConnexion");
