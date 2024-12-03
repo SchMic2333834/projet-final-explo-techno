@@ -3,7 +3,6 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        flex: 10%;
         width: 100%;
         height: 7vh;
         background-color: #1e1e1e;

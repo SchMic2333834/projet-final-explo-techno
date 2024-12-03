@@ -12,6 +12,7 @@
             text-align: center;
             color:white;
             width:100vw;
+            background: #1e1e1e;
         }
         .quantico-regular {
             font-family: "Quantico", sans-serif;
@@ -65,7 +66,6 @@
 
         ::-webkit-scrollbar-track {
             background: #1e1e1e;
-            border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
