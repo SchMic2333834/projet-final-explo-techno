@@ -1,18 +1,26 @@
 <meta charset="UTF-8">
     <title>Détections pendant les périodes d'activation</title>
     <style>
+        html {
+            margin: 0;
+            padding: 0;
+        }
         body {
+            background: linear-gradient(135deg, #1f1f1f, #3b3b3b);
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: linear-gradient(135deg, #1f1f1f, #3b3b3b);
             margin: 0;
             color: #e4e4e4;
+            /*height: max-content;*/
+            height: 100%;
+            overflow-x: hidden;
         }
 
         #contentData {
             width: 100%;
-            height: 100%;
+            height: 95%;
+            overflow-y: scroll;
             padding: 0 5vw;
         }
 
@@ -95,6 +103,15 @@
             font-style: italic;
             color: #e4e4e4;
         }
+        footer {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #333;
+        color: #e4e4e4;
+        text-align: center;
+    }
     </style>
 </head>
 <body>

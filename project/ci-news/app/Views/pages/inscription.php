@@ -9,7 +9,7 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        height: 90vh;
+        height: 93vh;
         margin: 0;
         background: linear-gradient(135deg, #1f1f1f, #3b3b3b);
         color: #e4e4e4;
