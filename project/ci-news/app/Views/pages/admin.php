@@ -22,6 +22,9 @@
         }
         form {
             flex: 5%;
+            border-bottom: 1px solid #444;
+            border-left: 1px solid #444;
+            border-right: 1px solid #444;
         }
         #input {
             padding-left: 10px;
