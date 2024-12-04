@@ -14,6 +14,7 @@
         display: flex;
         flex-direction: row;
         gap: 50px;
+        overflow: hidden;
     }
 
     .navRight {

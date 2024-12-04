@@ -101,11 +101,11 @@
             <div id="noms">
                 <div class="nom">
                     <label for="nom" class="boxNom">Nom :</label>
-                    <input type="text" required name="nom" id="nom" class="boxNom">
+                    <input type="text" maxlength="25" required name="nom" id="nom" class="boxNom">
                 </div>
                 <div class="nom">
                     <label for="prenom" class="boxNom">Prénom :</label>
-                    <input type="text" required name="prenom" id="prenom" class="boxNom">
+                    <input type="text" maxlength="25" required name="prenom" id="prenom" class="boxNom">
                 </div>
             </div>
             
